@@ -1,12 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors'); // Import the cors middleware
+const cors = require('cors');
 const axios = require('axios');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors()); // Enable CORS for all routes
+app.use(cors());
 app.use(bodyParser.json());
 
 app.post('/getWeather', async (req, res) => {
@@ -19,7 +19,7 @@ app.post('/getWeather', async (req, res) => {
 
     const weatherData = await Promise.all(
       cities.map(async (city) => {
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=f1279002e1c9bf2f9822eebc87684777`);
+        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=YOUR_OPEN_WEATHER_API_KEY`);
         return { [city]: `${response.data.main.temp}°C` };
       })
     );
